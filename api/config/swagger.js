@@ -13,7 +13,8 @@ const documentacao = {
     { name: 'Usuários', description: 'Operações relacionadas aos usuários' },
     { name: 'Categorias', description: 'Operações relacionadas as categorias' },
     { name: 'Subcategorias', description: 'Operações relacionadas as subcategorias' },
-    { name: 'Transações', description: 'Operações relacionadas as transações' }
+    { name: 'Transações', description: 'Operações relacionadas as transações' },
+    { name: 'Dashboard', description: 'Operações relacionadas ao dashboard' }
   ],
   paths: {
     "/usuarios": {
@@ -29,7 +30,7 @@ const documentacao = {
           200: {
             description: "Dados obtidos com sucesso!",
             content: {
-              "apllication/json": {
+              "application/json": {
                 schema: {
                   type: "array",
                   items: { $ref: '#/components/schemas/Listar_Usuarios' }
@@ -42,6 +43,11 @@ const documentacao = {
       post: {
         tags: ['Usuários'],
         summary: 'Cadastrar novo usuário',
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Recebe nome, email, senha para cadastrar novo usuário",
         requestBody: {
           required: true,
@@ -61,6 +67,11 @@ const documentacao = {
       put: {
         tags: ['Usuários'],
         summary: 'Atualizar todos os dados do usuário',
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: 'Atualiza todos os dados de um usuário existente, é necessário enviar todos os campos',
         parameters: [
           {
@@ -100,6 +111,11 @@ const documentacao = {
       delete: {
         tags: ['Usuários'],
         summary: 'Remover Usuário',
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: 'Remove usuário existente pelo ID',
         parameters: [
           {
@@ -154,6 +170,11 @@ const documentacao = {
       get: {
         tags: ["Categorias"],
         summary: "Listar todas as categorias ativas",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         responses: {
           200: {
             description: "Dados obtidos com sucesso!",
@@ -172,6 +193,11 @@ const documentacao = {
       post: {
         tags: ["Categorias"],
         summary: "Cadastrar nova categoria",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Recebe nome, descricao, tipo, cor e icone para cadastrar nova categoria",
         requestBody: {
           required: true,
@@ -191,6 +217,11 @@ const documentacao = {
       put: {
         tags: ["Categorias"],
         summary: "Atualizar todos os dados da categoria",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Atualiza todos os campos de uma categoria existente, é necessário enviar todos os campos",
         parameters: [
           {
@@ -225,6 +256,11 @@ const documentacao = {
       patch: {
         tags: ["Categorias"],
         summary: "Atualizar parcialmente a categoria",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Atualiza apenas os campos enviados no corpo da requisição",
         parameters: [
           {
@@ -267,6 +303,11 @@ const documentacao = {
       delete: {
         tags: ["Categorias"],
         summary: "Remover categoria",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Desativa uma categoria existente pelo ID (soft delete)",
         parameters: [
           {
@@ -287,6 +328,11 @@ const documentacao = {
       get: {
         tags: ["Subcategorias"],
         summary: "Listar todas as subcategorias ativas",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         responses: {
           200: {
             description: "Dados obtidos com sucesso!",
@@ -305,6 +351,11 @@ const documentacao = {
       post: {
         tags: ["Subcategorias"],
         summary: "Cadastrar nova subcategoria",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Recebe nome e id_categoria para cadastrar uma nova subcategoria",
         requestBody: {
           required: true,
@@ -332,6 +383,11 @@ const documentacao = {
       get: {
         tags: ["Subcategorias"],
         summary: "Listar subcategorias por categoria",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Retorna todas as subcategorias ativas vinculadas a uma categoria",
         parameters: [
           {
@@ -362,6 +418,11 @@ const documentacao = {
       put: {
         tags: ["Subcategorias"],
         summary: "Atualizar todos os dados da subcategoria",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Atualiza todos os dados de uma subcategoria existente, é necessário enviar todos os campos",
         parameters: [
           {
@@ -396,6 +457,11 @@ const documentacao = {
       patch: {
         tags: ["Subcategorias"],
         summary: "Atualizar parcialmente a subcategoria",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Atualiza apenas os campos enviados no corpo da requisição",
         parameters: [
           {
@@ -438,6 +504,11 @@ const documentacao = {
       delete: {
         tags: ["Subcategorias"],
         summary: "Remover subcategoria",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Remove (desativa) uma subcategoria existente pelo ID",
         parameters: [
           {
@@ -458,6 +529,11 @@ const documentacao = {
       get: {
         tags: ["Transações"],
         summary: "Listar todas as transações",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Retorna todas as transações com nome da categoria e subcategoria",
         responses: {
           200: {
@@ -477,6 +553,11 @@ const documentacao = {
       post: {
         tags: ["Transações"],
         summary: "Cadastrar nova transação",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Cadastra uma nova transação financeira",
         requestBody: {
           required: true,
@@ -496,6 +577,11 @@ const documentacao = {
       get: {
         tags: ["Transações"],
         summary: "Listar transações por tipo",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Retorna todas as transações filtradas por tipo. E = Entrada, S = Saída",
         parameters: [
           {
@@ -534,6 +620,11 @@ const documentacao = {
       get: {
         tags: ["Transações"],
         summary: "Listar transações por categoria",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Retorna todas as transações de uma categoria específica",
         parameters: [
           {
@@ -564,6 +655,11 @@ const documentacao = {
       get: {
         tags: ["Transações"],
         summary: "Listar transações por subcategoria",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Retorna todas as transações de uma subcategoria específica",
         parameters: [
           {
@@ -594,6 +690,11 @@ const documentacao = {
       get: {
         tags: ["Transações"],
         summary: "Listar transações por período",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Retorna todas as transações entre duas datas. Formato: DD/MM/YYYY",
         parameters: [
           {
@@ -639,6 +740,11 @@ const documentacao = {
       put: {
         tags: ["Transações"],
         summary: "Atualizar todos os dados da transação",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Atualiza todos os campos de uma transação existente",
         parameters: [
           {
@@ -673,6 +779,11 @@ const documentacao = {
       delete: {
         tags: ["Transações"],
         summary: "Deletar transação",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Remove permanentemente uma transação pelo ID",
         parameters: [
           {
@@ -701,8 +812,12 @@ const documentacao = {
       get: {
         tags: ["Transações"],
         summary: "Listar todas as transações",
+        security: [
+          {
+            bearerAuth: []
+          }
+        ],
         description: "Retorna todos os valores com base no tipo infomado(E/S) ",
-        security: [{ bearerAuth: [] }],
         parameters: [
           {
             name: "tipo",
@@ -732,242 +847,249 @@ const documentacao = {
         }
       }
     },
-    "/dashboard/categoria": {
-      get: {
-        tags: ["Dashboerd"],
-        summary: "Total gosto categoria",
-        description: "Retorna a soma das saidas agrupadas por categoria para o grafico ",
-        security: [{ bearerAuth: [] }],
-        parameters: [
+    "/dashboard": {
+      "get": {
+        "summary": "Obtém todos os dados consolidados do dashboard",
+        security: [
           {
-            name: "tipo",
-            in: "query",
-            required: true,
-            description: "Tipo de transação: E para Entradas ou S para Saídas",
-            schema: {
-              type: "string",
-              enum: ["E", "S"],
-              example: "E"
-            }
+            bearerAuth: []
           }
         ],
-        responses: {
-          200: {
-            description: "Dados obtidos com sucesso!",
-            content: {
+        "description": "Retorna o resumo do mês atual, gastos por categoria, maiores despesas, evolução mensal e as transações mais recentes em uma única chamada.",
+        "responses": {
+          "200": {
+            "description": "Dados do dashboard retornados com sucesso.",
+            "content": {
               "application/json": {
-                schema: {
-                  type: "array",
-                  items: {
-                    type: "obejct",
-                    properties: {
-                      nome: { type: "string", example: "Alimentação" },
-                      total: { type: "number", example: 1250.00 }
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "resumoMesAtual": {
+                      "type": "object",
+                      "properties": {
+                        "entradas": { "type": "number", "example": 5500.00 },
+                        "saidas": { "type": "number", "example": 3200.50 },
+                        "saldo": { "type": "number", "example": 2299.50 }
+                      }
+                    },
+                    "categorias": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "nome": { "type": "string", "example": "Alimentação" },
+                          "total": { "type": "number", "example": 1250.00 }
+                        }
+                      }
+                    },
+                    "maioresGastos": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "descricao": { "type": "string", "example": "Aluguel" },
+                          "valor": { "type": "number", "example": 1500.00 },
+                          "data": { "type": "string", "example": "10/05/2026" }
+                        }
+                      }
+                    },
+                    "evolucaoMensal": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "mes": { "type": "string", "example": "05/2026" },
+                          "entradas": { "type": "number", "example": 5500.00 },
+                          "saidas": { "type": "number", "example": 3200.50 }
+                        }
+                      }
+                    },
+                    "ultimasTransacoes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "descricao": { "type": "string", "example": "Supermercado" },
+                          "valor": { "type": "number", "example": 180.30 },
+                          "tipo": { "type": "string", "example": "S", "description": "E para Entrada, S para Saída" },
+                          "data": { "type": "string", "example": "17/05/2026" }
+                        }
+                      }
                     }
                   }
                 }
               }
-            }
-          },
-          500: { description: "Erro interno do servidor" }
-        }
-      }
-    },
-    "/dashboard/maiores-gastos": {
-      get: {
-        tags: ["Dashboerd"],
-        summary: "Top 5 maiores despesas",
-        description: "Retorna as 5 maiores despesas que saiu ",
-        security: [{ bearerAuth: [] }],
-        responses: {
-          200: {
-            description: "Dados obtidos com sucesso!",
-            content: {
-              "application/json": {
-                schema: {
-                  type: "array",
-                  items: {
-                    type: "object",
-                    properties: {
-                      descricao: { type: "string", example: "Aluguel do escritorio" },
-                      valor: { type: "number", example: 2500.00 },
-                      data_registro: { type: "string", format: 'date-time', example: "15/5/2026" }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          500: { description: "Erro interno do servidor" }
-        }
-      }
-    }
-  },
-  components: {
-    securitySchemes: {
-      bearerAuth: {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-        description: 'Insira o token JWT obtido no login'
-      }
-    },
-    schemas: {
-      Listar_Usuarios: {
-        type: 'object',
-        properties: {
-          id: { type: "integer", example: 1 },
-          nome: { type: "string", example: "Ricardo" },
-          email: { type: "string", example: "ricardo@email.com" }
-        }
-      },
-      Cadastrar_Usuario: {
-        type: 'object',
-        properties: {
-          nome: { type: "string", example: "Ricardo" },
-          email: { type: "string", example: "ricardo2@email.com" },
-          senha: { type: "string", example: "Senha123" }
-        }
-      },
-      Atualizar_Usuario: {
-        type: 'object',
-        required: ["nome", "email", "senha"],
-        properties: {
-          nome: { type: "string", example: "Nina" },
-          email: { type: "string", example: "nina@email.com" },
-          senha: { type: "string", example: "Senha123" }
-        }
-      },
-      Login_Usuario: {
-        type: 'object',
-        required: ['email', 'senha'],
-        properties: {
-          email: { type: "string", example: "ricardo2@email.com" },
-          senha: { type: "string", example: "Senha123" }
-        }
-      },
-      Resposta_Login: {
-        type: 'object',
-        properties: {
-          message: { type: 'string', example: 'Login realizado com sucesso' },
-          token: { type: 'string', description: 'Token JWT gerado', example: 'eyJhbGciOiJIUzI1Ni...' },
-          usuario: {
-            type: 'object',
-            properties: {
-              id_usuario: { type: "integer", example: 1 },
-              nome: { type: "string", example: 'Ricardo' },
-              email: { type: "string", example: "ricardo@email.com" }
             }
           }
         }
-      },
-      Listar_Categorias: {
-        type: "object",
-        properties: {
-          id_categoria: { type: "integer", example: 1 },
-          nome: { type: "string", example: "Saúde" },
-          descricao: { type: "string", example: "Gastos com saúde" },
-          tipo: { type: "string", enum: ["E", "S"], example: "S" },
-          cor: { type: "string", example: "#FF5733" },
-          icone: { type: "string", example: "heart" },
-          ativo: { type: "boolean", example: true }
+      }
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+          description: 'Insira o token JWT obtido no login'
         }
       },
-      Cadastrar_Categoria: {
-        type: "object",
-        required: ["nome", "tipo"],
-        properties: {
-          nome: { type: "string", example: "Saúde" },
-          descricao: { type: "string", example: "Gastos com saúde" },
-          tipo: { type: "string", enum: ["E", "S"], example: "S" },
-          cor: { type: "string", example: "#FF5733" },
-          icone: { type: "string", example: "heart" }
-        }
-      },
-      Patch_Categoria: {
-        type: "object",
-        properties: {
-          nome: { type: "string", example: "Saúde" },
-          descricao: { type: "string", example: "Gastos com saúde" },
-          tipo: { type: "string", enum: ["E", "S"], example: "S" },
-          cor: { type: "string", example: "#FF5733" },
-          icone: { type: "string", example: "heart" }
-        }
-      },
-      Listar_Subcategorias: {
-        type: "object",
-        properties: {
-          id_subcategoria: { type: "integer", example: 1 },
-          nome: { type: "string", example: "Consulta Médica" },
-          ativo: { type: "boolean", example: true },
-          id_categoria: { type: "integer", example: 2 }
-        }
-      },
-      Cadastrar_Subcategoria: {
-        type: "object",
-        required: ["nome", "id_categoria"],
-        properties: {
-          nome: { type: "string", example: "Consulta Médica" },
-          id_categoria: { type: "integer", example: 2 }
-        }
-      },
-      Atualizar_Subcategoria: {
-        type: "object",
-        required: ["nome", "id_categoria"],
-        properties: {
-          nome: { type: "string", example: "Exame de Sangue" },
-          id_categoria: { type: "integer", example: 2 }
-        }
-      },
-      Patch_Subcategoria: {
-        type: "object",
-        properties: {
-          nome: { type: "string", example: "Exame de Sangue" },
-          id_categoria: { type: "integer", example: 3 }
-        }
-      },
-      Listar_Transacoes: {
-        type: "object",
-        properties: {
-          id_transacao: { type: "integer", example: 1 },
-          valor: { type: "number", example: 150.00 },
-          descricao: { type: "string", example: "Consulta médica" },
-          data_registro: { type: "string", example: "15/01/2024 10:30:00" },
-          data_vencimento: { type: "string", example: "20/01/2024" },
-          data_pagamento: { type: "string", example: "18/01/2024" },
-          tipo: { type: "string", enum: ["E", "S"], example: "S" },
-          id_categoria: { type: "integer", example: 2 },
-          nome_categoria: { type: "string", example: "Saúde" },
-          id_subcategoria: { type: "integer", example: 5 },
-          nome_subcategoria: { type: "string", example: "Consulta Médica" }
-        }
-      },
-      Cadastrar_Transacao: {
-        type: "object",
-        required: ["valor", "tipo"],
-        properties: {
-          valor: { type: "number", example: 150.00 },
-          descricao: { type: "string", example: "Consulta médica" },
-          data_vencimento: { type: "string", example: "20/01/2024" },
-          data_pagamento: { type: "string", example: "18/01/2024" },
-          tipo: { type: "string", enum: ["E", "S"], example: "S" },
-          id_subcategoria: { type: "integer", example: 5 },
-          id_categoria: { type: "integer", example: 2 }
-        }
-      },
-      Total_Transacoes: {
-        type: "object",
-        properties: {
-          total: {
-            type: "number",
-            format: "float",
-            example: 1550.10,
-            description: "Soma total dos valores das transações filtradas"
+      schemas: {
+        Listar_Usuarios: {
+          type: 'object',
+          properties: {
+            id: { type: "integer", example: 1 },
+            nome: { type: "string", example: "Ricardo" },
+            email: { type: "string", example: "ricardo@email.com" }
+          }
+        },
+        Cadastrar_Usuario: {
+          type: 'object',
+          properties: {
+            nome: { type: "string", example: "Ricardo" },
+            email: { type: "string", example: "ricardo2@email.com" },
+            senha: { type: "string", example: "Senha123" }
+          }
+        },
+        Atualizar_Usuario: {
+          type: 'object',
+          required: ["nome", "email", "senha"],
+          properties: {
+            nome: { type: "string", example: "Nina" },
+            email: { type: "string", example: "nina@email.com" },
+            senha: { type: "string", example: "Senha123" }
+          }
+        },
+        Login_Usuario: {
+          type: 'object',
+          required: ['email', 'senha'],
+          properties: {
+            email: { type: "string", example: "ricardo2@email.com" },
+            senha: { type: "string", example: "Senha123" }
+          }
+        },
+        Resposta_Login: {
+          type: 'object',
+          properties: {
+            message: { type: 'string', example: 'Login realizado com sucesso' },
+            token: { type: 'string', description: 'Token JWT gerado', example: 'eyJhbGciOiJIUzI1Ni...' },
+            usuario: {
+              type: 'object',
+              properties: {
+                id_usuario: { type: "integer", example: 1 },
+                nome: { type: "string", example: 'Ricardo' },
+                email: { type: "string", example: "ricardo@email.com" }
+              }
+            }
+          }
+        },
+        Listar_Categorias: {
+          type: "object",
+          properties: {
+            id_categoria: { type: "integer", example: 1 },
+            nome: { type: "string", example: "Saúde" },
+            descricao: { type: "string", example: "Gastos com saúde" },
+            tipo: { type: "string", enum: ["E", "S"], example: "S" },
+            cor: { type: "string", example: "#FF5733" },
+            icone: { type: "string", example: "heart" },
+            ativo: { type: "boolean", example: true }
+          }
+        },
+        Cadastrar_Categoria: {
+          type: "object",
+          required: ["nome", "tipo"],
+          properties: {
+            nome: { type: "string", example: "Saúde" },
+            descricao: { type: "string", example: "Gastos com saúde" },
+            tipo: { type: "string", enum: ["E", "S"], example: "S" },
+            cor: { type: "string", example: "#FF5733" },
+            icone: { type: "string", example: "heart" }
+          }
+        },
+        Patch_Categoria: {
+          type: "object",
+          properties: {
+            nome: { type: "string", example: "Saúde" },
+            descricao: { type: "string", example: "Gastos com saúde" },
+            tipo: { type: "string", enum: ["E", "S"], example: "S" },
+            cor: { type: "string", example: "#FF5733" },
+            icone: { type: "string", example: "heart" }
+          }
+        },
+        Listar_Subcategorias: {
+          type: "object",
+          properties: {
+            id_subcategoria: { type: "integer", example: 1 },
+            nome: { type: "string", example: "Consulta Médica" },
+            ativo: { type: "boolean", example: true },
+            id_categoria: { type: "integer", example: 2 }
+          }
+        },
+        Cadastrar_Subcategoria: {
+          type: "object",
+          required: ["nome", "id_categoria"],
+          properties: {
+            nome: { type: "string", example: "Consulta Médica" },
+            id_categoria: { type: "integer", example: 2 }
+          }
+        },
+        Atualizar_Subcategoria: {
+          type: "object",
+          required: ["nome", "id_categoria"],
+          properties: {
+            nome: { type: "string", example: "Exame de Sangue" },
+            id_categoria: { type: "integer", example: 2 }
+          }
+        },
+        Patch_Subcategoria: {
+          type: "object",
+          properties: {
+            nome: { type: "string", example: "Exame de Sangue" },
+            id_categoria: { type: "integer", example: 3 }
+          }
+        },
+        Listar_Transacoes: {
+          type: "object",
+          properties: {
+            id_transacao: { type: "integer", example: 1 },
+            valor: { type: "number", example: 150.00 },
+            descricao: { type: "string", example: "Consulta médica" },
+            data_registro: { type: "string", example: "15/01/2024 10:30:00" },
+            data_vencimento: { type: "string", example: "20/01/2024" },
+            data_pagamento: { type: "string", example: "18/01/2024" },
+            tipo: { type: "string", enum: ["E", "S"], example: "S" },
+            id_categoria: { type: "integer", example: 2 },
+            nome_categoria: { type: "string", example: "Saúde" },
+            id_subcategoria: { type: "integer", example: 5 },
+            nome_subcategoria: { type: "string", example: "Consulta Médica" }
+          }
+        },
+        Cadastrar_Transacao: {
+          type: "object",
+          required: ["valor", "tipo"],
+          properties: {
+            valor: { type: "number", example: 150.00 },
+            descricao: { type: "string", example: "Consulta médica" },
+            data_vencimento: { type: "string", example: "20/01/2024" },
+            data_pagamento: { type: "string", example: "18/01/2024" },
+            tipo: { type: "string", enum: ["E", "S"], example: "S" },
+            id_subcategoria: { type: "integer", example: 5 },
+            id_categoria: { type: "integer", example: 2 }
+          }
+        },
+        Total_Transacoes: {
+          type: "object",
+          properties: {
+            total: {
+              type: "number",
+              format: "float",
+              example: 1550.10,
+              description: "Soma total dos valores das transações filtradas"
+            }
           }
         }
       }
     }
   }
-};
+}
 
 export default documentacao;

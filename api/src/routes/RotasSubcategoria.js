@@ -2,9 +2,10 @@ import { Router } from "express";
 import { BD } from "../../db.js";
 
 const router = Router();
+import { autenticarToken } from "../middlewares/autenticacao.js";
 
 //  LISTAR SUBCATEGORIAS
-router.get('/subcategorias', async (req, res) => {
+router.get('/subcategorias', autenticarToken, async (req, res) => {
     try {
         const comando = `SELECT * FROM SUBCATEGORIAS WHERE ativo = '1'`;
         const subcategorias = await BD.query(comando);
@@ -17,7 +18,7 @@ router.get('/subcategorias', async (req, res) => {
 });
 
 // LISTAR SUBCATEGORIAS POR CATEGORIA
-router.get('/subcategorias/categoria/:id_categoria', async (req, res) => {
+router.get('/subcategorias/categoria/:id_categoria', autenticarToken, async (req, res) => {
     const { id_categoria } = req.params;
     try {
         const comando = `SELECT * FROM SUBCATEGORIAS WHERE id_categoria = $1 AND ativo = '1'`;
@@ -31,7 +32,7 @@ router.get('/subcategorias/categoria/:id_categoria', async (req, res) => {
 });
 
 // CADASTRAR SUBCATEGORIA
-router.post('/subcategorias', async (req, res) => {
+router.post('/subcategorias', autenticarToken, async (req, res) => {
     const { nome, id_categoria } = req.body;
     try {
         // Verifica se a categoria existe
@@ -54,7 +55,7 @@ router.post('/subcategorias', async (req, res) => {
 });
 
 //  ATUALIZAR SUBCATEGORIA
-router.put('/subcategorias/:id_subcategoria', async (req, res) => {
+router.put('/subcategorias/:id_subcategoria', autenticarToken, async (req, res) => {
     const { id_subcategoria } = req.params;
     const { nome, id_categoria } = req.body;
 
@@ -85,7 +86,7 @@ router.put('/subcategorias/:id_subcategoria', async (req, res) => {
 });
 
 // ATUALIZAR PARCIALMENTE SUBCATEGORIA (PATCH)
-router.patch('/subcategorias/:id_subcategoria', async (req, res) => {
+router.patch('/subcategorias/:id_subcategoria', autenticarToken, async (req, res) => {
     const { id_subcategoria } = req.params;
     const { nome, id_categoria } = req.body;
 
@@ -122,7 +123,7 @@ router.patch('/subcategorias/:id_subcategoria', async (req, res) => {
 });
 
 //  DELETAR SUBCATEGORIA
-router.delete('/subcategorias/:id_subcategoria', async (req, res) => {
+router.delete('/subcategorias/:id_subcategoria', autenticarToken, async (req, res) => {
     const { id_subcategoria } = req.params;
 
     try {

@@ -2,9 +2,10 @@ import { Router } from "express";
 import { BD } from "../../db.js";
 
 const router = Router();
+import { autenticarToken } from "../middlewares/autenticacao.js";
 
 //  LISTAR CATEGORIAS
-router.get('/categorias', async (req, res) => {
+router.get('/categorias', autenticarToken, async (req, res) => {
     try {
         const comando = `SELECT * FROM CATEGORIAS WHERE ativo = '1'`;
         const categorias = await BD.query(comando);
@@ -17,7 +18,7 @@ router.get('/categorias', async (req, res) => {
 });
 
 // CADASTRAR CATEGORIA
-router.post('/categorias', async (req, res) => {
+router.post('/categorias', autenticarToken, async (req, res) => {
     const { nome, descricao, cor, icone, tipo } = req.body;
     try {
         const comando = `
@@ -34,7 +35,7 @@ router.post('/categorias', async (req, res) => {
 });
 
 //  ATUALIZAR CATEGORIA
-router.put('/categorias/:id_categoria', async (req, res) => {
+router.put('/categorias/:id_categoria', autenticarToken, async (req, res) => {
     const { id_categoria } = req.params;
     const { nome, descricao, cor, icone, tipo } = req.body;
 
@@ -64,7 +65,7 @@ router.put('/categorias/:id_categoria', async (req, res) => {
 });
 
 // ATUALIZAR PARCIALMENTE CATEGORIA (PATCH)
-router.patch('/categorias/:id_categoria', async (req, res) => {
+router.patch('/categorias/:id_categoria', autenticarToken, async (req, res) => {
     const { id_categoria } = req.params;
     const { nome, descricao, cor, icone, tipo } = req.body;
 
@@ -104,7 +105,7 @@ router.patch('/categorias/:id_categoria', async (req, res) => {
 });
 
 //  DELETAR 
-router.delete('/categorias/:id_categoria', async (req, res) => {
+router.delete('/categorias/:id_categoria', autenticarToken, async (req, res) => {
     const { id_categoria } = req.params;
 
     try {

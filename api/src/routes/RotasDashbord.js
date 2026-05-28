@@ -1,12 +1,14 @@
 import { Router } from "express";
 import { BD } from "../../db.js";
+import { autenticarToken } from "../middlewares/autenticacao.js";
+
 
 const router = Router();
 const SECRET_KEY = 'sua_chave_secreta';
 
 //Endpoints do Dashbord
 
-router.get('/dashboard', async (req, res) => {
+router.get('/dashboard', autenticarToken, async (req, res) => {
     try {
         // Grafico de Pizza por categoria
         const selecaocategoria = `SELECT c.nome, SUM(t.valor) as total FROM transacoes t

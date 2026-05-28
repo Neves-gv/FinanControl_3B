@@ -6,7 +6,7 @@ import { autenticarToken } from "../middlewares/autenticacao.js";
 const router = Router();
 
 //Listar Transações
-router.get('/transacoes', async (req, res) => { 
+router.get('/transacoes', autenticarToken, async (req, res) => { 
     try {
         const comando = `SELECT t.id_transacao, t.valor, t.descricao, TO_CHAR(t.data_registro, 'DD/MM/YYYY') AS data_registro,
         TO_CHAR(t.data_vencimento, 'DD/MM/YYYY') AS data_vencimento,
@@ -28,7 +28,7 @@ router.get('/transacoes', async (req, res) => {
     }
 });
 //Listar Transações po tipo
-router.get('/transacoes/tipo/:tipo', async (req, res) => {
+router.get('/transacoes/tipo/:tipo', autenticarToken, async (req, res) => {
     try {
         const { tipo } = req.params;
         if (tipo !== 'E' && tipo !== 'S') {
@@ -54,7 +54,7 @@ router.get('/transacoes/tipo/:tipo', async (req, res) => {
     }
 });
 //Listar Transações por categoria
-router.get('/transacoes/categoria/:id_categoria', async (req, res) => {
+router.get('/transacoes/categoria/:id_categoria', autenticarToken, async (req, res) => {
     try {
         const { id_categoria } = req.params;
         const comando = `SELECT t.id_transacao, t.valor, t.descricao, TO_CHAR(t.data_registro, 'DD/MM/YYYY') AS data_registro,
@@ -77,7 +77,7 @@ router.get('/transacoes/categoria/:id_categoria', async (req, res) => {
     }
 });
 //Listar Transações subcategoria
-router.get('/transacoes/subcategoria/:id_subcategoria', async (req, res) => {
+router.get('/transacoes/subcategoria/:id_subcategoria', autenticarToken, async (req, res) => {
     try {
         const { id_subcategoria } = req.params;
         const comando = `SELECT t.id_transacao, t.valor, t.descricao, TO_CHAR(t.data_registro, 'DD/MM/YYYY') AS data_registro,
@@ -100,7 +100,7 @@ router.get('/transacoes/subcategoria/:id_subcategoria', async (req, res) => {
     }
 });
 // CADASTRAR Transações
-router.post('/transacoes', async (req, res) => {
+router.post('/transacoes', autenticarToken, async (req, res) => {
     try {
         const { valor, descricao, data_vencimento, data_pagamento, tipo, id_subcategoria, id_categoria } = req.body;
 
@@ -119,7 +119,7 @@ router.post('/transacoes', async (req, res) => {
     }
 });
 //Atualizar
-router.put('/transacoes/:id_transacao', async (req, res) => {
+router.put('/transacoes/:id_transacao', autenticarToken, async (req, res) => {
     try {
         const { id_transacao } = req.params;
         const { valor, descricao, data_vencimento, data_pagamento, tipo, id_subcategoria, id_categoria } = req.body;
@@ -151,7 +151,7 @@ router.put('/transacoes/:id_transacao', async (req, res) => {
     }
 });
 //Deletar
-router.delete('/transacoes/:id_transacao', async (req, res) => {
+router.delete('/transacoes/:id_transacao', autenticarToken, async (req, res) => {
     try {
         const { id_transacao } = req.params;
 
@@ -171,7 +171,7 @@ router.delete('/transacoes/:id_transacao', async (req, res) => {
     }
 });
 //Listar Transações periodo
-router.get('/transacoes/periodo', async (req, res) => {
+router.get('/transacoes/periodo', autenticarToken, async (req, res) => {
     const { inicio, fim } = req.query;
     if (!inicio || !fim) {
         return res.status(400).json({ message: 'Informe as datas de inicio e fim. Ex: ?inicio=01/01/2024&fim=31/01/2024' });

@@ -19,7 +19,7 @@ router.get('/usuarios', autenticarToken, async (req, res) => {
 });
 
 // ================= CADASTRAR USUÁRIO =================
-router.post('/usuarios', async (req, res) => {
+router.post('/usuarios', autenticarToken, async (req, res) => {
     const { nome, email, senha, tipo_usuario } = req.body;
     try {
         const saltRounds = 10;
@@ -37,7 +37,7 @@ router.post('/usuarios', async (req, res) => {
 });
 
 // ================= ATUALIZAR USUÁRIO  =================
-router.put('/usuarios/:id_usuario', async (req, res) => {
+router.put('/usuarios/:id_usuario', autenticarToken, async (req, res) => {
     const { id_usuario } = req.params;
     const { nome, email, senha, tipo_usuario } = req.body;
     try {
@@ -62,7 +62,7 @@ router.put('/usuarios/:id_usuario', async (req, res) => {
 });
 
 // ================= PATCH =================
-router.patch('/usuarios/:id_usuario', async (req, res) => {
+router.patch('/usuarios/:id_usuario', autenticarToken, async (req, res) => {
     const { id_usuario } = req.params;
     const { nome, email, senha, tipo_usuario } = req.body;
 
@@ -102,7 +102,7 @@ router.patch('/usuarios/:id_usuario', async (req, res) => {
 });
 
 // ================= DELETE =================
-router.delete('/usuarios/:id_usuario', async (req, res) => {
+router.delete('/usuarios/:id_usuario', autenticarToken, async (req, res) => {
     const { id_usuario } = req.params;
     try {
         const comando = `UPDATE USUARIOS SET ativo = false WHERE id_usuario = $1`;
