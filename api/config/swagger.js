@@ -7,7 +7,7 @@ const documentacao = {
   },
   servers: [
     { url: 'http://localhost:3000', description: 'localhost' },
-    { url: 'https://vercel.com/docs/projects/overview#project-name', description: 'vercel' }
+    { url: 'https://api-murex-one-28.vercel.app', description: 'vercel' }
   ],
   tags: [
     { name: 'Usuários', description: 'Operações relacionadas aos usuários' },
