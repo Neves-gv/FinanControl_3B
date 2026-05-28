@@ -849,6 +849,7 @@ const documentacao = {
     },
     "/dashboard": {
       "get": {
+        tags: ["Dashboard"],
         "summary": "Obtém todos os dados consolidados do dashboard",
         security: [
           {
@@ -924,7 +925,9 @@ const documentacao = {
         }
       }
     },
-    components: {
+    
+  },
+  components: {
       securitySchemes: {
         bearerAuth: {
           type: 'http',
@@ -1089,7 +1092,6 @@ const documentacao = {
         }
       }
     }
-  }
 }
 
 export default documentacao;
